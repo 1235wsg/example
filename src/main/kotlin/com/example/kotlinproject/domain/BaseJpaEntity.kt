@@ -7,6 +7,7 @@ import jakarta.persistence.MappedSuperclass
 import jakarta.persistence.PrePersist
 import jakarta.persistence.PreUpdate
 import jakarta.persistence.Version
+import org.springframework.data.domain.AbstractAggregateRoot
 import java.time.Instant
 
 /**
@@ -24,7 +25,7 @@ abstract class BaseJpaEntity(
 
     @Version
     var version: Int = 0
-) {
+):AbstractAggregateRoot<BaseJpaEntity>() {
     @PrePersist
     fun prePersist() {
         val currentTime = Instant.now()
